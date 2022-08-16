@@ -1,3 +1,6 @@
 [submodule "src/ydlidar"]
 	path = src/ydlidar
 	url = https://github.com/EAIBOT/ydlidar
+[submodule "src/ros-pwm-pca9685"]
+	path = src/ros-pwm-pca9685
+	url = https://github.com/dheera/ros-pwm-pca9685.git
