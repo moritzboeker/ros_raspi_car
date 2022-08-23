@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+	<node name="pwm_pca9685_node" pkg="pwm_pca9685" type="pca9685_node" output="screen">
+		<param name="device" value="/dev/i2c-1"/>
+		<param name="address" value="0x40"/>
+		<param name="frequency" value="50"/>
+		<param name="timeout" value="[500, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+		<param name="timeout_value" value="[5000, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+		<param name="pwm_min" value="[3500, 3500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+		<param name="pwm_max" value="[6500, 6500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+	</node>
+</launch>
