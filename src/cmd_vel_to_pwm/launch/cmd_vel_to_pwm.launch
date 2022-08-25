@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+        <!-- start node to convert cmd_vel messages into ackermann messages -->
+	<node name="cmd_vel_to_ackermann_drive_node" pkg="cmd_vel_to_pwm" type="cmd_vel_to_ackermann_drive.py" output="screen">
+		<param name="twist_cmd_topic" type="str" value="/cmd_vel"/>
+                <param name="ackermann_cmd_topic" type="str" value="/ackermann_cmd"/>        
+                <param name="wheelbase" type="double" value="0.45"/>      
+                <param name="frame_id" type="str" value="odom"/>
+	</node>
+        <!-- start node to convert ackermann messages into pwm messages -->
+	<node name="ackermann_drive_to_pwm_node" pkg="cmd_vel_to_pwm" type="ackermann_drive_to_pwm.py" output="screen">
+                <param name="pwm_center_speed" type="int" value="5000"/>   
+                <param name="pwm_center_steering" type="int" value="5000"/>      
+                <param name="pwm_max_forward" type="int" value="6500"/>      
+                <param name="pwm_min_backward" type="int" value="3500"/>      
+                <param name="pwm_max_left" type="int" value="6500"/>      
+                <param name="pwm_min_right" type="int" value="3500"/>         
+	</node>
+        <!-- start node to send pwm messages to throttle and steering servo via i2c -->
+	<node name="pwm_pca9685_node" pkg="pwm_pca9685" type="pca9685_node" output="screen">
+		<param name="device" type="str" value="/dev/i2c-1"/>
+		<param name="address" type="str" value="0x40"/>
+		<param name="frequency" type="int" value="50"/>
+		<param name="timeout" type="yaml" value="[250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+		<param name="timeout_value" type="yaml" value="[5000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+		<param name="pwm_min" type="yaml" value="[3500, 3500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+		<param name="pwm_max" type="yaml" value="[6500, 6500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]"/>
+	</node>
+</launch>
