@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="wheel_encoder_node" pkg="wheel_encoder" type="wheel_encoder_node.py" output="screen">
+        <param name="encoder_pin" value="13" type="int" />
+    </node>
+</launch>
