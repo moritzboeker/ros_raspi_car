@@ -14,7 +14,9 @@
                 <param name="pwm_max_forward" type="int" value="6500"/>      
                 <param name="pwm_min_backward" type="int" value="3500"/>      
                 <param name="pwm_max_left" type="int" value="6500"/>      
-                <param name="pwm_min_right" type="int" value="3500"/>         
+                <param name="pwm_min_right" type="int" value="3500"/>    
+                <param name="max_steering_angle" type="double" value="$(eval 60.0*3.1415/180)"/>              
+                <param name="max_speed" type="double" value="1.0"/> 
 	</node>
         <!-- start node to send pwm messages to throttle and steering servo via i2c -->
 	<node name="pwm_pca9685_node" pkg="pwm_pca9685" type="pca9685_node" output="screen">

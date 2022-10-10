@@ -13,12 +13,11 @@ def ackermann_callback(data):
   global pwm_min_backward
   global pwm_max_left
   global pwm_min_right
+  global max_steering_angle
+  global max_speed
 
   current_steering_angle = data.drive.steering_angle
   current_speed = data.drive.speed
-
-  max_steering_angle = np.radians(60.0)
-  max_speed = 1.0
 
   pwm_speed = int(pwm_center_speed + (pwm_max_forward - pwm_min_backward) / 2 * current_speed / max_speed)
   pwm_steering = int(pwm_center_steering + (pwm_max_left - pwm_min_right) / 2 * current_steering_angle / max_steering_angle)
@@ -37,7 +36,8 @@ if __name__ == '__main__':
     pwm_min_backward = rospy.get_param('~pwm_min_backward', 3500)
     pwm_max_left = rospy.get_param('~pwm_max_left', 6500)
     pwm_min_right = rospy.get_param('~pwm_min_right', 3500)
-
+    max_steering_angle = rospy.get_param('~max_steering_angle', np.radians(60.0))
+    max_speed = rospy.get_param('~max_speed', 1.0)
     ackermann_cmd_topic = rospy.get_param('~ackermann_cmd_topic', '/ackermann_cmd')        
     intarr_pwm_topic = rospy.get_param('~intarr_pwm_topic', '/command')     
     rospy.Subscriber(ackermann_cmd_topic, AckermannDriveStamped, ackermann_callback, queue_size=1)
