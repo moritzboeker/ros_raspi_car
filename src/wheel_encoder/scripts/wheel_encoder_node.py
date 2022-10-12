@@ -8,6 +8,7 @@ from std_msgs.msg import Bool, Float64
 class Encoder():
     def __init__(self):
         self.encoder_pin = rospy.get_param('~encoder_pin', default=13)
+        self.meter_per_ticks = rospy.get_param('~meter_per_ticks', default=0.01)
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.encoder_pin, GPIO.IN)
         rate = rospy.Rate(100)
@@ -17,7 +18,6 @@ class Encoder():
         self.speed_msg = Float64() # linear velocity of vehicle
         self.old_magnet_reading = False
         self.cur_magnet_reading = False
-        self.meter_per_ticks = 0.009 # how many meters the vehicle travels for a single encoder tick
         self.ticks_ctr = 0 # the number of encoder ticks counted within the time period
         self.time_window = 0.25 # the duration in seconds for which encoder ticks are counted
         self.last_time = rospy.Time.now()
