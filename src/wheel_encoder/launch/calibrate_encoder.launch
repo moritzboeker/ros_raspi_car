@@ -2,5 +2,5 @@
 <launch>
   <include file="$(find cmd_vel_to_pwm)/launch/cmd_vel_to_pwm.launch" />
   <include file="$(find wheel_encoder)/launch/wheel_encoder.launch" />
-  <!-- Launch calibrate_odom_node.py separately in another terminal, since user is asked for input.-->
+  <!-- Launch calibrate_encoder_node.py separately in another terminal, since user is asked for input.-->
 </launch>

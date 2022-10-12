@@ -59,5 +59,5 @@ class Calibration():
             self.rate.sleep()
 
 if __name__ == '__main__':
-    rospy.init_node("calibrate_odom_node", anonymous=True)
+    rospy.init_node("calibrate_encoder_node", anonymous=True)
     Calibration()
