@@ -34,7 +34,7 @@ class Calibration():
             self.meters_per_tick = self.ui_dist / self.sum_encoder_ticks
         except ZeroDivisionError:
             print("Sorry, no encoder ticks were registered!")
-        print("For each odometry tick the robot travels {:.3f} m".format(self.meters_per_tick))
+        print("For each odometry tick the robot travels {:f} m".format(self.meters_per_tick))
 
     def encoder_callback(self, msg):
         if msg.data and self.permission:
