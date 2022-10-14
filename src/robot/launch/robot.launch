@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-  <include file="$(find robot)/launch/own_lidar.launch" />
   <include file="$(find cmd_vel_to_pwm)/launch/cmd_vel_to_pwm.launch" />
+  <include file="$(find odometry)/launch/odometry.launch" />
+  <include file="$(find wheel_encoder)/launch/wheel_encoder.launch" />
+  <include file="$(find robot)/launch/own_lidar.launch" />
   <!--node name="tf_broadcaster" pkg="robot" type="tf_broadcaster" output="screen" /-->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/launch/robot.rviz" />
 </launch>
