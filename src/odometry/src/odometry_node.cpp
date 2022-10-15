@@ -6,7 +6,11 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/Int32MultiArray.h>
 
-#define WHEELBASE 0.45
+int steering_idx;
+int steering_pwm_center;
+int steering_max_ampl_pwm;
+double steering_max_ampl_angle;
+double wheelbase;
 
 double fwrd_speed = 0.0;
 double steering_angle = 0.0;
@@ -22,10 +26,6 @@ void fwrd_speed_callback(const std_msgs::Float64::ConstPtr& msg){
 }
 
 void pwm_callback(const std_msgs::Int32MultiArray::ConstPtr& msg){
-    int steering_idx = 1;
-    int steering_pwm_center = 5000;
-    int steering_max_ampl_pwm = 1500;
-    double steering_max_ampl_angle = 40.0 * M_PI / 180.0;
     double rad_per_pwm = (double) steering_max_ampl_angle / steering_max_ampl_pwm;
     double steering_pwm = msg->data[steering_idx];
     if (steering_pwm > steering_pwm_center + steering_max_ampl_pwm){
@@ -35,7 +35,7 @@ void pwm_callback(const std_msgs::Int32MultiArray::ConstPtr& msg){
       steering_pwm = steering_pwm_center - steering_max_ampl_pwm;
     }
     steering_angle = (steering_pwm - steering_pwm_center) * rad_per_pwm;
-    vth = fwrd_speed / WHEELBASE * tan(steering_angle);
+    vth = fwrd_speed / wheelbase * tan(steering_angle);
 }
 
 int main(int argc, char** argv){
@@ -47,6 +47,12 @@ int main(int argc, char** argv){
   ros::Subscriber pwm_sub = n.subscribe("command", 1000, pwm_callback);
   tf::TransformBroadcaster odom_broadcaster;
 
+  n.param("steering_pwm_index", steering_idx, 1);
+  n.param("steering_pwm_center", steering_pwm_center, 5000);
+  n.param("steering_max_ampl_pwm", steering_max_ampl_pwm, 1500);
+  n.param("steering_max_ampl_angle", steering_max_ampl_angle, 40.0 * M_PI / 180.0);
+  n.param("wheelbase", wheelbase, 0.34);
+
   double x = 0.0;
   double y = 0.0; 
   double th = 0.0;
@@ -55,7 +61,7 @@ int main(int argc, char** argv){
   current_time = ros::Time::now();
   last_time = ros::Time::now();
 
-  ros::Rate r(1.0);
+  ros::Rate r(50.0);
   while(n.ok()){
 
     ros::spinOnce();               // check for incoming messages
