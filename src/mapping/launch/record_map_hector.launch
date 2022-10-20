@@ -1,0 +1,11 @@
+<launch>
+   <master auto="start"/>
+
+	 <!-- Run hector_mapping -->
+	<include file="$(find mapping)/launch/mapping_hector_mapping.launch" />
+
+	<!-- Run rviz -->
+	<node pkg="rviz" type="rviz" name="rviz"
+    args="-d $(find mapping)/rviz_cfg/mapping.rviz"/>
+
+</launch>
