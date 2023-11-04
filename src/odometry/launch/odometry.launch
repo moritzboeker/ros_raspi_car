@@ -5,6 +5,6 @@
         <param name="steering_pwm_center" value="5000" type="int" />
         <param name="steering_max_ampl_pwm" value="1500" type="int" />
         <param name="steering_max_ampl_angle" value="$(eval 40.0 * 3.1415 / 180.0)" type="double" />
-        <param name="wheelbase" value="0.34" type="double" />
+        <param name="wheelbase" value="0.335" type="double" />
     </node>
 </launch>
