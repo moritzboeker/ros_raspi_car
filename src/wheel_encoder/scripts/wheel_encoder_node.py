@@ -22,7 +22,7 @@ class Encoder():
         self.cur_magnet_reading = False
         self.direction_factor = 1.0
         self.ticks_ctr = 0 # the number of encoder ticks counted within the time period
-        self.time_window = 0.25 # the duration in seconds for which encoder ticks are counted
+        self.time_window = 0.25 # the duration in seconds for which encoder ticks are counted and current speed is determined
         self.last_time = rospy.Time.now()
         while not rospy.is_shutdown():
             self.read_encoder_ticks()
