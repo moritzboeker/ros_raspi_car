@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find cmd_vel_to_pwm)/launch/cmd_vel_to_pwm.launch" />
+  <include file="$(find wheel_encoder)/launch/wheel_encoder.launch" />
+  <include file="$(find odometry)/launch/odometry.launch" />
+</launch>
