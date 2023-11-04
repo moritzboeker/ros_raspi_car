@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-# This code has been taken from ros package teb_local_planner and was originally written by christoph.roesmann@tu-dortmund.de.
-# Modifications were done by Moritz Boeker
+# source: https://github.com/rst-tu-dortmund/teb_local_planner/blob/noetic-devel/scripts/cmd_vel_to_ackermann_drive.py
+# original author: christoph.roesmann@tu-dortmund.de.
+# modifications: Moritz Boeker
 
 import rospy, math
 from geometry_msgs.msg import Twist
