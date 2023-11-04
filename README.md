@@ -23,6 +23,19 @@ This repo contains the ROS packages developed or used to turn a remote controlle
 	- Add a joystick widget
 	- Remote control your car and enjoy!
 
+## Changes to Ydlidar ROS1 driver
+- The original [ROS driver for YDLidar](https://github.com/YDLIDAR/ydlidar_ros_driver) depends on the [YDLidar SDK](https://github.com/YDLIDAR/YDLidar-SDK)
+- For some reason, I could not manage to install YDLidar SDK
+- Therefore, I used this third-party YDLidar ROS driver from [EAIBOT](https://github.com/EAIBOT/ydlidar) which works without YDLidar SDK
+- However, with this package the `LaserScan` could not be transformed to any other frame besides the `laser` frame
+- But the solution was provided by a comment in this [issue](https://github.com/EAIBOT/ydlidar/issues/14)
+- edit ydlidar/src/ydlidar_node.cpp by changing the following lines
+  - L134: scan_msg.scan_time = scan.config.scan_time; →scan_msg.scan_time = scan.config.scan_time/1000000000ul;
+  - L135: scan_msg.time_increment = scan.config.time_increment; → scan_msg.time_increment = scan.config.time_increment/1000000000ul;
+- build the workspace again
+- ROS should now be able to transform the LaserScan into arbitrary frames of the tf tree
+- You can check this by displaying the LaserScan in Rviz with a fixed fram set e.g., to `base_link` or `odom`
+
 
 ## How to add odometry to a remote controlled car
 - Identify the drive shaft of the rc car and determine its diameter
