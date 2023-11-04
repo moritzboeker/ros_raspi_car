@@ -4,7 +4,7 @@
 	<node name="cmd_vel_to_ackermann_drive_node" pkg="cmd_vel_to_pwm" type="cmd_vel_to_ackermann_drive.py" output="screen">
 		<param name="twist_cmd_topic" type="str" value="/cmd_vel"/>
                 <param name="ackermann_cmd_topic" type="str" value="/ackermann_cmd"/>        
-                <param name="wheelbase" type="double" value="0.335"/>      
+                <param name="wheelbase" type="double" value="0.34"/>      
                 <param name="frame_id" type="str" value="odom"/>
 	</node>
         <!-- start node to convert ackermann messages into pwm messages -->
