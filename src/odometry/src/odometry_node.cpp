@@ -21,8 +21,6 @@ double vth = 0.0;
 
 void fwrd_speed_callback(const std_msgs::Float64::ConstPtr& msg){
     fwrd_speed = msg->data;
-    vx = fwrd_speed * cos(steering_angle);
-    vy = fwrd_speed * sin(steering_angle);
 }
 
 void pwm_callback(const std_msgs::Int32MultiArray::ConstPtr& msg){
@@ -35,7 +33,6 @@ void pwm_callback(const std_msgs::Int32MultiArray::ConstPtr& msg){
       steering_pwm = steering_pwm_center - steering_max_ampl_pwm;
     }
     steering_angle = (steering_pwm - steering_pwm_center) * rad_per_pwm;
-    vth = fwrd_speed / wheelbase * tan(steering_angle);
 }
 
 int main(int argc, char** argv){
@@ -43,8 +40,8 @@ int main(int argc, char** argv){
 
   ros::NodeHandle n;
   ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("odom", 50);
-  ros::Subscriber fwrd_speed_sub = n.subscribe("encoder_speed", 1000, fwrd_speed_callback);
-  ros::Subscriber pwm_sub = n.subscribe("command", 1000, pwm_callback);
+  ros::Subscriber fwrd_speed_sub = n.subscribe("encoder_speed", 100, fwrd_speed_callback);
+  ros::Subscriber pwm_sub = n.subscribe("command", 100, pwm_callback);
   tf::TransformBroadcaster odom_broadcaster;
 
   n.param("steering_pwm_index", steering_idx, 1);
@@ -54,7 +51,7 @@ int main(int argc, char** argv){
   n.param("wheelbase", wheelbase, 0.34);
 
   double x = 0.0;
-  double y = 0.0; 
+  double y = 0.0;
   double th = 0.0;
 
   ros::Time current_time, last_time;
@@ -63,9 +60,12 @@ int main(int argc, char** argv){
 
   ros::Rate r(50.0);
   while(n.ok()){
-
     ros::spinOnce();               // check for incoming messages
     current_time = ros::Time::now();
+
+    vx = fwrd_speed * cos(steering_angle);
+    vy = fwrd_speed * sin(steering_angle);
+    vth = fwrd_speed / wheelbase * tan(steering_angle);
 
     //compute odometry in a typical way given the velocities of the robot
     double dt = (current_time - last_time).toSec();
