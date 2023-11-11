@@ -8,6 +8,12 @@ This repo contains the ROS packages developed or used to turn a remote controlle
 - hall sensor
 - neodymium magnets
 
+## Install Software on Raspberry Pi 4
+- get and install a Raspberry Pi 4 image with Ubuntu 20.04 from https://www.ubiquityrobotics.com/downloads-raspberry-pi/ and install it
+- ssh into the Pi and bring it into your Wifi by going through this [quick start guide](https://learn.ubiquityrobotics.com/noetic_quick_start_connecting)
+- disable the Ubiquityrobotics systemd service by running `sudo systemctl disable magni-base` ([references](https://ubiquityrobotics.github.io/learn_legacy_archive/image_no_magni))
+
+
 ## How to remote control your car via [ROS-Mobile App](https://github.com/ROS-Mobile/ROS-Mobile-Android)
 - ROS package `cmd_vel_to_pwm` (requires ROS package ros-pwm-pca9685)
 	- ROS node `cmd_vel_to_ackermann_drive`
