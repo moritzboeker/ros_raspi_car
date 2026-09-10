@@ -49,8 +49,4 @@ docker buildx build --platform linux/arm64 -t ghcr.io/moritzboeker/ros_crawler:j
 
 ## Third-party code
 
-`ros2_vanjee_lidar_driver/` contains Vanjee's `vanjee_lidar_sdk` and `vanjee_lidar_msg` packages (v2.0.7, © 2023 Vanjee, BSD-3-Clause — see `ros2_vanjee_lidar_driver/vanjee_lidar_sdk/LICENSE`), downloaded from [vanjee.net](http://www.vanjee.net/download_files/1571790315333623808.html) and modified for this project:
-
-- switched the build from ROS1/catkin to ROS2/colcon (`package_ros2.xml` → `package.xml`, `COMPILE_METHOD COLCON`)
-- compile with C++17 on all ROS2 distros (required by rclcpp since Humble, vendor only enabled it for Humble)
-- added a `config_path` ROS2 parameter to `vanjee_lidar_sdk_node`, so the lidar config can live in `bringup/config/` instead of being hardcoded at compile time
+`ros2_vanjee_lidar_driver/` is a git submodule of [ros2_vanjee_lidar_driver](https://github.com/moritzboeker/ros2_vanjee_lidar_driver), a ROS2 port of Vanjee's BSD-3-Clause `vanjee_lidar_sdk` — see that repo's README for details and attribution.
