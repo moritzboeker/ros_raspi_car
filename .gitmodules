@@ -4,3 +4,7 @@
 [submodule "ros2_sparkfun_otos_driver"]
 	path = ros2_sparkfun_otos_driver
 	url = https://github.com/moritzboeker/ros2_sparkfun_otos_driver.git
+[submodule "ros2_vanjee_lidar_driver"]
+	path = ros2_vanjee_lidar_driver
+	url = https://github.com/moritzboeker/ros2_vanjee_lidar_driver.git
+	branch = ros2
